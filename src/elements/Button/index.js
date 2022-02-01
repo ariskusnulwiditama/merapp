@@ -12,9 +12,24 @@ export default function Button(props) {
     
     const onClick = () => {
         if(props.onClick) props.onClick()
+    };
+
+    if(props.isDisabled || props.isLoading){
+        if(props.isDisabled) className.push("disabled")
+        return (
+            <span className={className.join(" ")} style={props.style}>
+                {props.isLoading ? (
+                <>
+                    <span className="spinner-border spinner-border-sm mx-5"></span>
+                    <span className="sr-only">Loading...</span>
+                </>):(
+                    props.children
+                )}
+            </span>
+        );    
     }
 
-    if(posps.type === "link") {
+    if(props.type === "link") {
         if(props.isExternal) {
             return(
              <a 
@@ -37,15 +52,17 @@ export default function Button(props) {
             )
         }
     }
-  return <div></div>;
+  return <button className={className.join(" ")}
+  style={props.style} onClick={onClick}>{props.children}</button>;
 }
 
 Button.propTypes = {
     type: propTypes.oneOf(["button", "link"]),
-    onClick: PropTypes.func,
+    onClick: propTypes.func,
     href: propTypes.string,
     target: propTypes.string,
     className: propTypes.string,
+    isExternal: propTypes.bool,
     isDisabled: propTypes.bool,
     isLoading: propTypes.bool,
     isSmall: propTypes.bool,
