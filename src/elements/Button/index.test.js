@@ -10,9 +10,9 @@ test("Should not allowed click button if isDisabled is present", () =>{
 });
 
 test("Should render loading/spinner", () =>{
-    const {container, getBytext} = render(<Button isLoading></Button>);
+    const {container, getByText} = render(<Button isLoading></Button>);
 
-    expect(getBytext(/loading/i)).toBeInTheDocument();
+    expect(getByText(/loading/i)).toBeInTheDocument();
     expect(container.querySelector("span")).toBeInTheDocument();
 });
 
